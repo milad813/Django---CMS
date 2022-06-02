@@ -15,6 +15,11 @@ class Authors(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     age = models.IntegerField()
+<<<<<<< HEAD
+=======
+    def __str__(self) -> str:
+        return self.username
+>>>>>>> parent of 7e91c73 (minor change)
 
 
 class Posts(models.Model):
