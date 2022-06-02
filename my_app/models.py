@@ -1,5 +1,13 @@
 from django.db import models
 
+class Comments(models.Model):
+    name=models.CharField(max_length=100)
+    email=models.EmailField(max_length=255)
+    content=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.created_at
+
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -7,6 +15,11 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
 
 class Authors(models.Model):
     username = models.CharField(max_length=255)
@@ -16,7 +29,7 @@ class Authors(models.Model):
     last_name = models.CharField(max_length=255)
     age = models.IntegerField()
     def __str__(self) -> str:
-        return self.username
+        return self.first_name + ' ' + self.last_name
 
 
 class Posts(models.Model):
@@ -24,8 +37,10 @@ class Posts(models.Model):
     content = models.TextField()
     images = models.ImageField(upload_to='images/')
     counter_view = models.IntegerField(default=0)
-    author_id = models.ForeignKey(Authors, on_delete=models.SET_NULL, null=True)
-    category_id = models.ManyToManyField(Category)
+    author = models.ForeignKey(Authors, on_delete=models.SET_NULL, null=True)
+    category = models.ManyToManyField(Category)
+    tags = models.ManyToManyField(Tag)
+    comments = models.ManyToManyField(Comments)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)
@@ -36,8 +51,5 @@ class Posts(models.Model):
     def __str__(self):
         return self.title
 
-class Comments(models.Model):
-    name=models.CharField(max_length=100)
-    email=models.EmailField(max_length=255)
-    text=models.TextField()
+
 

@@ -1,42 +1,5 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="zxx" class="no-js">
-  <head>
-    <!-- Mobile Specific Meta -->
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <!-- Favicon-->
-    <link rel="shortcut icon" href="img/fav.png" />
-    <!-- Author Meta -->
-    <meta name="author" content="colorlib" />
-    <!-- Meta Description -->
-    <meta name="description" content="" />
-    <!-- Meta Keyword -->
-    <meta name="keywords" content="" />
-    <!-- meta character set -->
-    <meta charset="UTF-8" />
-    <!-- Site Title -->
-    <title>Travel</title>
-
-    <link
-      href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700"
-      rel="stylesheet"
-    />
-    <!--
-			CSS
-			============================================= -->
-    <link rel="stylesheet" href="{% static 'my_app/css/linearicons.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/font-awesome.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/bootstrap.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/magnific-popup.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/jquery-ui.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/nice-select.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/animate.min.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/owl.carousel.css' %}" />
-    <link rel="stylesheet" href="{% static 'my_app/css/main.css' %}" />
-  </head>
+{% include 'my_app/header.html' %}
   <body>
     <header id="header">
       <div class="header-top">
@@ -105,11 +68,11 @@
       <div class="container">
         <div class="row d-flex align-items-center justify-content-center">
           <div class="about-content col-lg-12">
-            <h1 class="text-white">Blog Details Page</h1>
+            <h1 class="text-white">{{post.title}}</h1>
             <p class="text-white link-nav">
               <a href="{% url 'my_app:app_home' %}">Home </a>
               <span class="lnr lnr-arrow-right"></span
-              ><a href="{% url 'my_app:app_home' %}">Blog </a>
+              ><a href="{% url 'my_app:blog_home' %}">Blog </a>
               <span class="lnr lnr-arrow-right"></span>
                {{post.title}}
             </p>
@@ -129,25 +92,24 @@
                 <div class="feature-img">
                   <img
                     class="img-fluid"
-                    src="{% static 'my_app/img/blog/feature-img1.jpg' %}"
+                    src="{{post.images.url}}"
                     alt=""
                   />
                 </div>
               </div>
               <div class="col-lg-3 col-md-3 meta-details">
                 <ul class="tags">
-                  <li><a href="#">Food,</a></li>
-                  <li><a href="#">Technology,</a></li>
-                  <li><a href="#">Politics,</a></li>
-                  <li><a href="#">Lifestyle</a></li>
+                  {% for cat in post.category.all %}
+										<li><a href="#">{{ cat }}{% if not forloop.last %}, {% endif %}</a></li>
+										{% endfor %}
                 </ul>
                 <div class="user-details row">
                   <p class="user-name col-lg-12 col-md-12 col-6">
-                    <a href="#">Mark wiens</a>
+                    <a href="#">{{post.author}}</a>
                     <span class="lnr lnr-user"></span>
                   </p>
                   <p class="date col-lg-12 col-md-12 col-6">
-                    <a href="#">{{post.created_at}}</a>
+                    <a href="#">{{post.created_at | date:"M d, Y"}}</a>
                     <span class="lnr lnr-calendar-full"></span>
                   </p>
                   <p class="view col-lg-12 col-md-12 col-6">
@@ -226,6 +188,7 @@
             </div>
             <div class="comments-area">
               <h4>05 Comments</h4>
+              {% for comment in post.comments.all %}
               <div class="comment-list">
                 <div class="single-comment justify-content-between d-flex">
                   <div class="user justify-content-between d-flex">
@@ -233,10 +196,10 @@
                       <img src="{% static 'my_app/img/blog/c1.jpg' %}" alt="" />
                     </div>
                     <div class="desc">
-                      <h5><a href="#">Emilly Blunt</a></h5>
-                      <p class="date">December 4, 2017 at 3:12 pm</p>
+                      <h5><a href="#">{{comment.name}}</a></h5>
+                      <p class="date">{{comment.created_at | date:'Y m d H m'}}</p>
                       <p class="comment">
-                        Never say goodbye till the end comes!
+                        {{comment.content}}
                       </p>
                     </div>
                   </div>
@@ -245,82 +208,8 @@
                   </div>
                 </div>
               </div>
-              <div class="comment-list left-padding">
-                <div class="single-comment justify-content-between d-flex">
-                  <div class="user justify-content-between d-flex">
-                    <div class="thumb">
-                      <img src="{% static 'my_app/img/blog/c2.jpg' %}" alt="" />
-                    </div>
-                    <div class="desc">
-                      <h5><a href="#">Elsie Cunningham</a></h5>
-                      <p class="date">December 4, 2017 at 3:12 pm</p>
-                      <p class="comment">
-                        Never say goodbye till the end comes!
-                      </p>
-                    </div>
-                  </div>
-                  <div class="reply-btn">
-                    <a href="" class="btn-reply text-uppercase">reply</a>
-                  </div>
-                </div>
-              </div>
-              <div class="comment-list left-padding">
-                <div class="single-comment justify-content-between d-flex">
-                  <div class="user justify-content-between d-flex">
-                    <div class="thumb">
-                      <img src="{% static 'my_app/img/blog/c3.jpg' %}" alt="" />
-                    </div>
-                    <div class="desc">
-                      <h5><a href="#">Annie Stephens</a></h5>
-                      <p class="date">December 4, 2017 at 3:12 pm</p>
-                      <p class="comment">
-                        Never say goodbye till the end comes!
-                      </p>
-                    </div>
-                  </div>
-                  <div class="reply-btn">
-                    <a href="" class="btn-reply text-uppercase">reply</a>
-                  </div>
-                </div>
-              </div>
-              <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                  <div class="user justify-content-between d-flex">
-                    <div class="thumb">
-                      <img src="{% static 'my_app/img/blog/c4.jpg' %}" alt="" />
-                    </div>
-                    <div class="desc">
-                      <h5><a href="#">Maria Luna</a></h5>
-                      <p class="date">December 4, 2017 at 3:12 pm</p>
-                      <p class="comment">
-                        Never say goodbye till the end comes!
-                      </p>
-                    </div>
-                  </div>
-                  <div class="reply-btn">
-                    <a href="" class="btn-reply text-uppercase">reply</a>
-                  </div>
-                </div>
-              </div>
-              <div class="comment-list">
-                <div class="single-comment justify-content-between d-flex">
-                  <div class="user justify-content-between d-flex">
-                    <div class="thumb">
-                      <img src="{% static 'my_app/img/blog/c5.jpg' %}" alt="" />
-                    </div>
-                    <div class="desc">
-                      <h5><a href="#">Ina Hayes</a></h5>
-                      <p class="date">December 4, 2017 at 3:12 pm</p>
-                      <p class="comment">
-                        Never say goodbye till the end comes!
-                      </p>
-                    </div>
-                  </div>
-                  <div class="reply-btn">
-                    <a href="" class="btn-reply text-uppercase">reply</a>
-                  </div>
-                </div>
-              </div>
+              {% endfor %}
+
             </div>
             <div class="comment-form">
               <h4>Leave a Comment</h4>
@@ -568,18 +457,10 @@
               <div class="single-sidebar-widget tag-cloud-widget">
                 <h4 class="tagcloud-title">Tag Clouds</h4>
                 <ul>
-                  <li><a href="#">Technology</a></li>
-                  <li><a href="#">Fashion</a></li>
-                  <li><a href="#">Architecture</a></li>
-                  <li><a href="#">Fashion</a></li>
-                  <li><a href="#">Food</a></li>
-                  <li><a href="#">Technology</a></li>
-                  <li><a href="#">Lifestyle</a></li>
-                  <li><a href="#">Art</a></li>
-                  <li><a href="#">Adventure</a></li>
-                  <li><a href="#">Food</a></li>
-                  <li><a href="#">Lifestyle</a></li>
-                  <li><a href="#">Adventure</a></li>
+
+                  {% for tag in post.tags.all %}
+                  <li><a href="#">{{ tag }}</a></li>
+										{% endfor %}
                 </ul>
               </div>
             </div>
@@ -590,130 +471,6 @@
     <!-- End post-content Area -->
 
     <!-- start footer Area -->
-    <footer class="footer-area section-gap">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-              <h6>About Agency</h6>
-              <p>
-                The world has become so fast paced that people don’t want to
-                stand by reading a page of information, they would much rather
-                look at a presentation and understand the message. It has come
-                to a point
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-              <h6>Navigation Links</h6>
-              <div class="row">
-                <div class="col">
-                  <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Feature</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Portfolio</a></li>
-                  </ul>
-                </div>
-                <div class="col">
-                  <ul>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Blog</a></li>
-                    <li><a href="#">Contact</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="single-footer-widget">
-              <h6>Newsletter</h6>
-              <p>
-                For business professionals caught between high OEM price and
-                mediocre print and graphic output.
-              </p>
-              <div id="mc_embed_signup">
-                <form
-                  target="_blank"
-                  action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
-                  method="get"
-                  class="subscription relative"
-                >
-                  <div class="input-group d-flex flex-row">
-                    <input
-                      name="EMAIL"
-                      placeholder="Email Address"
-                      onfocus="this.placeholder = ''"
-                      onblur="this.placeholder = 'Email Address '"
-                      required=""
-                      type="email"
-                    />
-                    <button class="btn bb-btn">
-                      <span class="lnr lnr-location"></span>
-                    </button>
-                  </div>
-                  <div class="mt-10 info"></div>
-                </form>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="single-footer-widget mail-chimp">
-              <h6 class="mb-20">InstaFeed</h6>
-              <ul class="instafeed d-flex flex-wrap">
-                <li><img src="{% static 'my_app/img/i1.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i2.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i3.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i4.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i5.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i6.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i7.jpg' %}" alt="" /></li>
-                <li><img src="{% static 'my_app/img/i8.jpg' %}" alt="" /></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div
-          class="row footer-bottom d-flex justify-content-between align-items-center"
-        >
-          <p class="col-lg-8 col-sm-12 footer-text m-0">
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy;
-            <script>
-              document.write(new Date().getFullYear());
-            </script>
-            All rights reserved | This template is made with
-            <i class="fa fa-heart-o" aria-hidden="true"></i> by
-            <a href="https://colorlib.com" target="_blank">Colorlib</a>
-            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-          </p>
-          <div class="col-lg-4 col-sm-12 footer-social">
-            <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="#"><i class="fa fa-twitter"></i></a>
-            <a href="#"><i class="fa fa-dribbble"></i></a>
-            <a href="#"><i class="fa fa-behance"></i></a>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <!-- End footer Area -->
-
-	<script src="{% static 'my_app/js/vendor/jquery-2.2.4.min.js' %}"></script>
-	<script src="{% static 'my_app/js/popper.min.js' %}"></script>
-	<script src="{% static 'my_app/js/vendor/bootstrap.min.js' %}"></script>			
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>		
-	 <script src="{% static 'my_app/js/jquery-ui.js' %}"></script>					
-	  <script src="{% static 'my_app/js/easing.min.js' %}"></script>			
-	<script src="{% static 'my_app/js/hoverIntent.js' %}"></script>
-	<script src="{% static 'my_app/js/superfish.min.js' %}"></script>	
-	<script src="{% static 'my_app/js/jquery.ajaxchimp.min.js' %}"></script>
-	<script src="{% static 'my_app/js/jquery.magnific-popup.min.js' %}"></script>						
-	<script src="{% static 'my_app/js/jquery.nice-select.min.js' %}"></script>					
-	<script src="{% static 'my_app/js/owl.carousel.min.js' %}"></script>							
-	<script src="{% static 'my_app/js/mail-script.js' %}"></script>	
-	<script src="{% static 'my_app/js/main.js' %}"></script>	
+    {% include 'my_app/footer.html' %}
   </body>
 </html>
