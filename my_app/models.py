@@ -15,6 +15,8 @@ class Authors(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     age = models.IntegerField()
+    def __str__(self) -> str:
+        return self.username
 
 
 class Posts(models.Model):
