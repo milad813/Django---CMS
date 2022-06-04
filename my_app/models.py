@@ -5,9 +5,7 @@ class Comments(models.Model):
     email=models.EmailField(max_length=255)
     content=models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
-    def __str__(self):
-        return self.created_at
-
+    
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -32,7 +30,7 @@ class Authors(models.Model):
         return self.first_name + ' ' + self.last_name
 
 
-class Posts(models.Model):
+class Post(models.Model):
     title = models.CharField(max_length=255)
     content = models.TextField()
     images = models.ImageField(upload_to='images/')
@@ -48,8 +46,6 @@ class Posts(models.Model):
     class Meta:
         ordering = ('-created_at',)
 
-    def __str__(self):
-        return self.title
 
 
 
