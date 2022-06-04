@@ -19,3 +19,8 @@ def category_list():
 def snippet(value):
 
 	return ' '.join(value.split()[:10]) + '...'
+
+@register.inclusion_tag('my_app/includes/latest_posts_tag.html')
+def latest_posts(count=5):
+	posts=Post.objects.filter(is_active=True)
+	return {'posts':posts[:count]}
