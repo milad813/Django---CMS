@@ -26,11 +26,8 @@ class Authors(models.Model):
     first_name = models.CharField(max_length=255)
     last_name = models.CharField(max_length=255)
     age = models.IntegerField()
-<<<<<<< HEAD
-=======
     def __str__(self) -> str:
         return self.username
->>>>>>> parent of 7e91c73 (minor change)
 
 
 class Post(models.Model):
@@ -41,7 +38,7 @@ class Post(models.Model):
     author = models.ForeignKey(Authors, on_delete=models.SET_NULL, null=True)
     category = models.ManyToManyField(Category)
     tags = models.ManyToManyField(Tag)
-    comments = models.ManyToManyField(Comments)
+    comments = models.ManyToManyField(Comment)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_active = models.BooleanField(default=True)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from my_app.models import Category, Post,Authors,Comments,Tag
+from my_app.models import Category, Post,Authors,Comment,Tag
 # Register your models here.
 class Post_admin(admin.ModelAdmin):
     list_display = ('title','counter_view','created_at', 'content')
@@ -25,5 +25,5 @@ class Comment_admin(admin.ModelAdmin):
     list_display = ('name','email','content','created_at')
 
     
-admin.site.register(Comments,Comment_admin)
+admin.site.register(Comment,Comment_admin)
 
