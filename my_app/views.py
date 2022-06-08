@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-from my_app.models import Authors, Category, Comments, Post
+from my_app.forms import CommentForm
+from my_app.models import Authors, Category, Post
 
 # Create your views here.
 
@@ -20,6 +20,7 @@ def blog_home(request, **kwargs):
         posts = paginator.page(1)
     except EmptyPage:
         posts = paginator.page(paginator.num_pages)
+        
 
     if kwargs.get('category_name'):
         posts = posts.filter(category__name=kwargs['category_name'])
