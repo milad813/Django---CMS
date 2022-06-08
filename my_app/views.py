@@ -32,5 +32,7 @@ def blog_home(request, **kwargs):
 
 def blog_post(request, post_id):
     post = get_object_or_404(Post, id=post_id, is_active=True)
+    post.counter_view += 1
+    post.save()
 
     return render(request, 'my_app/blog_post.html', {'post': post})
