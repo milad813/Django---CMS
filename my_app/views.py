@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
+from my_app.forms import ContactForm
 from my_app.models import Authors, Category, Comments, Post
+from django.contrib import messages
 
 # Create your views here.
 
@@ -36,3 +37,15 @@ def blog_post(request, post_id):
     post.save()
 
     return render(request, 'my_app/blog_post.html', {'post': post})
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your message has been sent!')
+            return render(request, 'my_app/contact.html')
+        else:
+            messages.error(request, 'Your message has not been sent!')
+            return render(request, 'my_app/blog_home.html')
+    return render(request, 'my_app/contact.html')

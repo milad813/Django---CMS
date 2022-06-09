@@ -10,4 +10,5 @@ urlpatterns=[
     path('blog/category/<str:category_name>/',views.blog_home,name='blog_category'),
     path('blog/author/<str:author_name>/',views.blog_home,name='blog_author'),
     path('blog/search/',views.blog_home,name='blog_search'),
+    path('contact/',views.contact,name='contact'),
 ]

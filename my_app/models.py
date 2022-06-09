@@ -45,7 +45,15 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-created_at',)
-
+    
+class Contact(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=30)
+    message = models.CharField(max_length=1200)
+        
+    def __str__(self):
+        return self.subject
 
 
 

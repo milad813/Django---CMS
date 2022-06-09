@@ -1,0 +1,16 @@
+{% load static %}
+<div class="container main-menu">
+    <div class="row align-items-center justify-content-between d-flex">
+      <div id="logo">
+        <a href="index.html"><img src="{% static 'my_app/img/logo.png' %}" alt="" title="" /></a>
+      </div>
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li><a href="{% url 'my_app:app_home' %}">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="menu-has-children"><a href="{% url 'my_app:blog_home' %}">Blog</a></li>					          					          		          
+          <li><a href="{% url 'my_app:contact' %}">Contact</a></li>
+        </ul>
+      </nav><!-- #nav-menu-container -->					      		  
+    </div>
+</div>
