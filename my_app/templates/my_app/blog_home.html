@@ -10,13 +10,13 @@
 			  				<ul>
 								{% if request.user.is_authenticated %}
 
-								<li><a href="#">Logout</a></li>
+								<li><a href="{% url 'accounts:signout' %}">Logout</a></li>
 								<li><a href="#">You are {{ request.user.username }}</a></li>
 								
 								
 	{% else %}
-								<li><a href="#">Login</a></li>
-								<li><a href="#">Register</a></li>
+								<li><a href="{% url 'accounts:login' %}">Login</a></li>
+								<li><a href="{% url 'accounts:signup' %}">Register</a></li>
 	{% endif %}
 			  				</ul>			
 			  			</div>

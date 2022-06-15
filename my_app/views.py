@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from my_app.forms import ContactForm
 from my_app.models import Authors, Category, Comments, Post
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -30,7 +31,7 @@ def blog_home(request, **kwargs):
         posts = posts.filter(content__icontains=querry)
     return render(request, 'my_app/blog_home.html', {'posts': posts})
 
-
+@login_required(login_url='/accounts/login/')
 def blog_post(request, post_id):
     post = get_object_or_404(Post, id=post_id, is_active=True)
     post.counter_view += 1

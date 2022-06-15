@@ -1,0 +1,14 @@
+{% extends 'shop/base.html' %}
+{% block content %}
+<div class="card-deck">
+    {% for product in products %}
+    <div class="card">
+      <img class="" width="150px" src="{{product.image.url}}" alt="Card image cap">
+      <div class="card-body">
+        <a href="{% url 'shop:product_detail' pk=product.id %}">{{product.title}}</a>
+        <a href="{% url 'shop:product_detail' pk=product.id %}">{{product.description}}</a>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+{% endblock %}
